@@ -14,10 +14,10 @@ from django.shortcuts import get_object_or_404
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from pikepdf import Pdf
 import fitz
+import PyPDF2
 from datetime import datetime
 import re
 from django.http import JsonResponse
-import PyPDF2
 import json
 from django.core.files.base import ContentFile
 from io import BytesIO
@@ -425,13 +425,15 @@ class StudyPlanListCreate(generics.ListCreateAPIView):
         else:
             is_public=False    
         book_title=str(file)
+        pdf_data = file.read()
         Book.objects.all().delete()
         book = Book.objects.create(title=book_title)
         book_outline=extract_book_outline(file)
+        print("Book outline : ",book_outline)
         store_text(file,book_outline,book_title,book)
         user=User.objects.get(id=owner)
-        temp_pdf_path = file.temporary_file_path()
-        doc = fitz.open(temp_pdf_path)
+        pdf_bytes = BytesIO(pdf_data)
+        doc = fitz.open("pdf", pdf_bytes)
         page = doc.load_page(0)  # number of page
         pix = page.get_pixmap()
         image_bytes = pix.tobytes()
@@ -482,10 +484,12 @@ def extract_book_outline(file):
         upper_page_range=[]
         pdf=Pdf.open(file)
         outline = pdf.open_outline()
+        print(outline)
         chapter_name=""
         all_content=[]
         try :
             for title in outline.root:
+                    print("title : ",title)
                     topics_list=[]
                     my_dict={}
                     numbers = re.findall(r'\d+', str(title))
@@ -494,8 +498,10 @@ def extract_book_outline(file):
                         my_dict['chapter']=chapter_name
                         my_dict['page_number']=numbers[-1]
                     for subtitle in title.children:
+                        print("subttitle : ",subtitle.title)
                         my_inner_dict={}
                         numbers = re.findall(r'\d+', str(subtitle))
+                        print("numbers : ",numbers)
                         if len(numbers)>1:
                             
                             my_inner_dict['topic']=subtitle.title
@@ -504,6 +510,7 @@ def extract_book_outline(file):
                             # print(subtitle.title,numbers)
                             lower_page_range.append(numbers[-1])
                     my_dict['topics']=topics_list
+                    print("My dict : ", my_dict)
                     all_content.append(my_dict)
         except Exception as e:
             print(e)                       

@@ -15,7 +15,7 @@ import Quiz_icon from './quiz_icon.svg'
 import StudyPlan_icon from './studyplan_icon.svg'
 function App() {
 
-
+  const textColor = { color: '#1f5692' };
 
     
   return (
@@ -90,17 +90,17 @@ function App() {
         <div className="right-container" style={{marginTop:'0%' }}>
           <div className="left-container" style={{textAlign:'center' ,marginLeft:'0%'}}>
           <br/>
-          <h2 style={{fontSize: '64px', fontWeight: 'bold', fontFamily: 'roca',color:'white'}}>What we provide</h2>
+          <h2 style={{fontSize: '44px', fontWeight: 'bold', fontFamily: 'roca',color:'white'}}>What we provide</h2>
           </div>
           </div>
      
          <div>
       <Row className="justify-content-center" style={{marginLeft:'5%',marginRight:'5%'}}>
       <Col xs={12} md={4}>
-  <Card style={{ marginTop: '5%', color: '#ffffff', textAlign: 'center',alignItems:'Center', height: '300px', borderRadius: '15px' }}>
+  <Card style={{ marginTop: '5%', color: '#ffffff', textAlign: 'center',alignItems:'Center', height: '250px', borderRadius: '15px' }}>
   <Card.Img variant="top" src={Summary_icon} style={{width:'70px',height:'70px',marginTop:'10px'}} />
     <Card.Body>
-      <Card.Title style={{ color: '#1f5692', fontSize: '30px', fontFamily: 'roca' }}>Quiz Generation</Card.Title>
+      <Card.Title style={{ color: '#1f5692', fontSize: '30px', fontWeight: 'bold', fontFamily: 'roca' }}>Quizes</Card.Title>
       <Card.Text style={{ color: '#1f5692' }}>
         Some quick example text to build on the card title and make up the bulk of the card's content.
       </Card.Text>
@@ -108,10 +108,10 @@ function App() {
   </Card>
 </Col>
 <Col xs={12} md={4}>
-  <Card style={{ marginTop: '5%', color: '#ffffff', textAlign: 'center',alignItems:'Center', height: '300px', borderRadius: '15px' }}>
+  <Card style={{ marginTop: '5%', color: '#ffffff', textAlign: 'center',alignItems:'Center', height: '250px', borderRadius: '15px' }}>
   <Card.Img variant="top" src={Quiz_icon} style={{width:'70px',height:'70px',marginTop:'10px'}} />
     <Card.Body>
-      <Card.Title style={{ color: '#1f5692', fontSize: '30px', fontFamily: 'roca' }}>Summary Generation</Card.Title>
+      <Card.Title style={{ color: '#1f5692', fontSize: '30px', fontWeight: 'bold', fontFamily: 'roca' }}>Quick Summaries</Card.Title>
       <Card.Text style={{ color: '#1f5692' }}>
         Some quick example text to build on the card title and make up the bulk of the card's content.
       </Card.Text>
@@ -119,10 +119,11 @@ function App() {
   </Card>
 </Col>
 <Col xs={12} md={4}>
-  <Card style={{ marginTop: '5%', color: '#ffffff', textAlign: 'center',alignItems:'Center', height: '300px', borderRadius: '15px' }}>
+  <Card style={{ marginTop: '5%', color: '#ffffff', textAlign: 'center',alignItems:'Center', height: '250px', borderRadius: '15px' }}>
   <Card.Img variant="top" src={StudyPlan_icon} style={{width:'70px',height:'70px',marginTop:'10px'}} />
     <Card.Body>
-      <Card.Title style={{ color: '#1f5692', fontSize: '30px', fontFamily: 'roca' }}>Study Plan Generation</Card.Title>
+    <Card.Title style={{ color: '#1f5692', fontSize: '30px', fontFamily: 'roca', fontWeight: 'bold' }}>Personalized StudyPlans</Card.Title>
+
       <Card.Text style={{ color: '#1f5692' }}>
         Some quick example text to build on the card title and make up the bulk of the card's content.
       </Card.Text>
@@ -136,125 +137,77 @@ function App() {
 {/*        
         </Row> */}
     </Container>
-  
-    {/* <Container class='container' fluid style={{ backgroundColor: '#f2f2f2' }}>
-      <Row style={{}}>
-        <Col md={6}  style={{marginTop:'5%' ,marginBottom:'5%'}} >
-        <div className="right-container" style={{marginTop:'5%' }}>
-          <div className="left-container" style={{textAlign:'left',marginTop:'5%' ,marginLeft:'10%' }}>
-          <p >SmartTutor AI</p>
-          <h2 style={{ fontSize: '44px', fontWeight: 'bold' }}>What we provide</h2>
 
-            <p>Get Personalized Study Plans</p>
-            <ul>
-              <li>Personalized Study Plans</li>
-              <li>AI Quiz Generation</li>
-              <li>AI Summary Generation</li>
-              <li>Community</li>
-            
-            </ul>
-            <Button  className="m-2">
-          Try Out
-        </Button>
+  <Container fluid style={{textAlign:'center' ,marginTop:'3%',backgroundColor:'#e1efff',height:'400px'}}>
+    {/* <h style={{fontSize:'34px',fontWeight:'bold' ,}}>Who is it For?</h> */}
+    <div className="right-container" style={{marginTop:'0%' }}>
+          <div className="left-container" style={{textAlign:'center' ,marginLeft:'0%',width:'60%',marginLeft:'20%'}}>
+          <br/>
+          <h2 style={{fontSize: '44px', fontWeight: 'bold', fontFamily: 'roca',color:'#1f5692'}}>Invest in your career with SmartTutor AI</h2>
+          <p>Get access to videos in over 90% of courses, Specializations, and Professional Certificates taught by top instructors from leading universities and companies.</p>
           </div>
-      
-      
           </div>
-        </Col>
-        <Col md={6} style={{marginTop:'5%' ,marginBottom:'5%'}} >
-   
-      <img
-  src={landingpage_gif}
-  alt="Your Image"
-  className="img-fluid"
-  style={{
-    border: '2px solid #ccc',
-    borderRadius: '10%',
-    width: '500px', // Set the width
-    height: '300px', // Set the height
-  }}
-/>
-
-        </Col>
-      </Row> 
-    </Container> */}
-
-    {/* <Container fluid style={{ backgroundColor: '#f2f2f2' }}>
-      <Row style={{}}>
-        <Col md={6}  style={{marginTop:'5%' ,marginBottom:'5%'}} >
+     
+         <div>
+         
     
-      <img
-  src={landingpage_gif}
-  alt="Your Image"
-  className="img-fluid"
-  style={{
-    border: '2px solid #ccc',
-    borderRadius: '10%',
-    width: '500px', // Set the width
-    height: '300px', // Set the height
-  }}
-/>
-        </Col>
-        <Col md={6} style={{marginTop:'5%' ,marginBottom:'5%'}} >
-          <div className="right-container" style={{marginTop:'5%' }}>
-          <div className="left-container" style={{textAlign:'left',marginTop:'5%' ,marginLeft:'10%' }}>
-          <p >SmartTutor AI</p>
-          <h2 style={{ fontSize: '44px', fontWeight: 'bold' }}>AI Quiz generation of Content</h2>
+          <Container>
+      {/* <Card style={{width:'70%',marginLeft:'15%'}}>
+        <Card.Body> */}
+     <Row style={{ marginTop: '3%', marginBottom: '3%', width: '80%', marginLeft: '10%' }}>
+  <Col>
+    <Card.Img variant="top" src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera_assets.s3.amazonaws.com/images/52653c8817c0031d547d6df9251e52ef.png?auto=format%2Ccompress&dpr=1&w=&h=55" style={{ width: '70px', height: '70px', marginTop: '10px' }} />
+    <br/>
+    <br/>
+    <Card.Title style={{ color: '#1f5692' }}>
+      Learn anything
+    </Card.Title>
+    <Card.Text style={{ color: '#1f5692' }}>
+      Explore any interest or trending topic, take prerequisites, and advance your skills   
+    </Card.Text>
+  </Col>
+  <Col>
+    <Card.Img variant="top" src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera_assets.s3.amazonaws.com/images/73feba6a844effd3a1116ba46b805171.png?auto=format%2Ccompress&dpr=1&w=&h=47" style={{ width: '70px', height: '70px', marginTop: '10px' }} />
+    <br/>
+    <br/>
+    
+    <Card.Title style={{ color: '#1f5692' }}>
+      Save money
+    </Card.Title>
+    <Card.Text style={{ color: '#1f5692' }}>
+      Spend less money on your learning if you plan to take multiple courses this year
+    </Card.Text>
+  </Col>
+  <Col>
+    <Card.Img variant="top" src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera_assets.s3.amazonaws.com/images/00b4aa50ad9e3233e50c4a39e3df94f0.png?auto=format%2Ccompress&dpr=1&w=&h=55" style={{ width: '70px', height: '70px', marginTop: '10px' }} />
+    <br/>
+    <br/>
+    <Card.Title style={{ color: '#1f5692' }}>
+      Flexible learning
+    </Card.Title>
+    <Card.Text style={{ color: '#1f5692' }}>
+      Learn at your own pace, move between multiple courses, or switch to a different course
+    </Card.Text>
+  </Col>
+  <Col>
+    <Card.Img variant="top" src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera_assets.s3.amazonaws.com/images/00b4aa50ad9e3233e50c4a39e3df94f0.png?auto=format%2Ccompress&dpr=1&w=&h=55" style={{ width: '70px', height: '70px', marginTop: '10px' }} />
+    <br/>
+    <br/>
+    <Card.Title style={{ color: '#1f5692' }}>
+      Flexible learning
+    </Card.Title>
+    <Card.Text style={{ color: '#1f5692' }}>
+      Learn at your own pace, move between multiple courses, or switch to a different course
+    </Card.Text>
+  </Col>
+</Row>
 
-            <p>we aim to provde following stuff to our users</p>
-            <ul>
-              <li>Personalized Study Plans</li>
-              <li>AI Quiz Generation</li>
-              <li>AI Summary Generation</li>
-              <li>Community</li>
-             
-            </ul>
-            <Button  className="m-2">
-          Try Out
-        </Button>
-          </div>
-          </div>
-      
-        </Col>
-      </Row>
-    </Container> */}
-  <Container fluid style={{textAlign:'center' ,marginTop:'3%',backgroundColor:'#e1efff',height:'600px'}}>
-    <h style={{fontSize:'34px',fontWeight:'bold' ,}}>Who is it For?</h>
-  <Row>
-      {/* <Col>
-        <Card>
-          <Card.Img variant="top"  style={{height:'300px'}}src={teacher_image1} />
-          <Card.Body>
-            <Card.Title>Students</Card.Title>
-            <Card.Text>
-            This could include high school, college, or university students preparing for exams, standardized tests (SAT, ACT, GRE, etc.), or even professional certifications
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Col>
-      <Col>
-        <Card>
-          <Card.Img variant="top" style={{height:'300px'}} src={student_image2} />
-          <Card.Body>
-            <Card.Title>Teachers</Card.Title>
-            <Card.Text>
-            This could include high school, college, or university students preparing for exams, standardized tests (SAT, ACT, GRE, etc.), or even professional certifications
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Col>
-      <Col>
-        <Card>
-          <Card.Img variant="top" style={{height:'300px'}} src={student_image1} />
-          <Card.Body>
-            <Card.Title>HR Managers</Card.Title>
-            <Card.Text>
-            This could include high school, college, or university students preparing for exams, standardized tests (SAT, ACT, GRE, etc.), or even professional certifications
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Col> */}
-    </Row>
+        {/* </Card.Body>
+      </Card> */}
+    </Container>
+    </div>
+
+  
 
 
   </Container>

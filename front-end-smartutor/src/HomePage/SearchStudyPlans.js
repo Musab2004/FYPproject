@@ -5,6 +5,7 @@ import { Container, Row, Col, Form, FormControl, Button } from 'react-bootstrap'
 import Navbar from "./HomePageNavbar"
 import AllStudyPlans from './AllStudyPlans';
 import userService from '../landing_page_component/UserSerive';
+import Footer from "../landing_page_component/footer"
 const CardList = ({ filteredCards }) => {
   return (
     <Col md={8}>
@@ -140,11 +141,15 @@ const App = () => {
       }
     `}
   </style>
+  <></>
     {posts.length === 0 ? (
+      <>
+      <Navbar activeTab={activeTab} />
       <div style={{ textAlign: 'center', marginTop: '20%' }}>
         <h3>No study plans available</h3>
         {/* You can add additional text or a message here */}
       </div>
+      </>
     ) : (
       <>
             <Navbar activeTab={activeTab} />
@@ -153,6 +158,9 @@ const App = () => {
         <AllStudyPlans studyPlans={posts} itemsPerPage={12} /> 
         </>
     )}
+      <footer className="bg-light text-lg-start" style={{marginTop:'100px'}}>
+       <Footer/>
+      </footer>
     </>
     // </Container>
   );

@@ -11,6 +11,7 @@ import userService from '../landing_page_component/UserSerive';
 import StudyPlanSettings from './StudyPlanSettings';
 // import { Link,useNavigate } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
+import Footer from "../landing_page_component/footer"
 const StylishTabs = () => {
   const navigate = useNavigate()
   const { userData } = useContext(UserContext);
@@ -243,6 +244,9 @@ const StylishTabs = () => {
    
  
     </div>
+    <footer className="bg-light text-lg-start" style={{marginTop:'100px'}}>
+       <Footer/>
+      </footer>
     </>
   );
 };

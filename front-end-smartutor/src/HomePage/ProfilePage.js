@@ -12,6 +12,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Link,useNavigate } from 'react-router-dom';
 import logo from '../landing_page_component/logo_smarttutor.svg';
 import Navbar from "./HomePageNavbar"
+import Footer from "../landing_page_component/footer"
 const UserProfile = () => {
   
   const [show, setShow] = useState(false);
@@ -110,7 +111,7 @@ const data = {
                                     <p>{userData.email_address}</p>
                                     <p>{userData.City}, {userData.Country}</p>
                                     <i className="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
-                                    <Button className="m-2" onClick={handleShow}>
+                                    <Button className="m-2" onClick={handleShow} style={{backgroundColor:'#f66b1d',borderColor:'#f66b1d'}}>
             Edit Profile
           </Button>
       
@@ -150,22 +151,36 @@ const data = {
 }
 
         <div>
-                    {userData && <Card className="user-card-full" style={{width:'900px',marginLeft:'15%'}}>
+                    {userData && <> <div style={{marginLeft:'15%'}}> <h1 style={{color:'#1f5692' ,fontStyle:'italic',fontSize:'24px'}}>Recent Activity</h1><Card className="user-card-full" style={{width:'900px'}}>
                      
                         
                             <Card.Body >
-                                <Card.Title>Education Activity</Card.Title>
-                            
-                                <Calendar style={{marginLeft:'10%'}}
-      tileContent={({ date, view }) => {
-        // Check if a date should be marked
-        if (view === 'month' && markedDates.includes(date.getTime())) {
-          // Mark the date with a dot
-          return <Badge variant="danger">User Activity</Badge>;
-        }
-      }}
-    />
-  
+                               
+                                <Container>
+      <Row>
+        <Col>
+          <div style={{ marginLeft: '10%', marginTop: '5%' }}>
+          <Calendar
+  style={{
+    borderColor: 'white',
+    backgroundColor: 'white',
+  }}
+  tileContent={({ date, view }) => {
+    if (view === 'month' && markedDates.includes(date.getTime())) {
+      return <Badge variant="danger">User Activity</Badge>;
+    }
+  }}
+/>
+          </div>
+        </Col>
+        <Col>
+        <div style={{textAlign:'center',marginTop:'15%'}}>
+          <h2 style={{color:'#f66b1d'}}>Current Streak</h2>
+          <h>no progress yet</h>
+          </div>
+        </Col>
+      </Row>
+    </Container>
 
   
 </Card.Body>
@@ -173,20 +188,48 @@ const data = {
 
                       
                     </Card>
-
+                    </div>
+                    </>
 
 
 }
-{userData && <Card className="user-card-full" style={{width:'900px', marginTop:'10%',marginLeft:'15%',marginBottom:'5%'}}>
+{userData && <div style={{marginLeft:'15%', marginTop:'10%'}}>
+  
+  <h1 style={{color:'#1f5692',fontSize:'24px',fontStyle:'italic'}}>Account Managment</h1>
+  <Card className="user-card-full" style={{width:'900px',marginBottom:'5%'}}>
                         
                     
                           
                             <Card.Body>
   
-    <Card.Title>StudyPLans</Card.Title>
+    {/* <Card.Title>Connect Your Accounts</Card.Title> */}
+    <div style={{marginLeft:'20%'}}>
+    <div>
+  <Button variant="primary" style={{ backgroundColor: 'white', borderColor: '#1f5692', width: '70%', height: '60px', marginTop: '30px', color: 'grey' }}>
+    <i className="fab fa-facebook-f" style={{ color: '#3b5998', fontSize: '1.2em',marginRight:'5%' }}></i> Connect to Facebook
+  </Button>
+</div>
+<div>
+  <Button variant="primary" style={{ backgroundColor: 'white', borderColor: '#1f5692', width: '70%', height: '60px', marginTop: '10px', color: 'grey' }}>
+    <i className="fab fa-twitter" style={{ color: '#1da1f2', fontSize: '1.2em',marginRight:'5%' }}></i> Connect to Twitter
+  </Button>
+</div>
+<div>
+  <Button variant="primary" style={{ backgroundColor: 'white', borderColor: '#1f5692', width: '70%', height: '60px', marginTop: '10px', color: 'grey' }}>
+    <i className="fab fa-google" style={{ color: '#dd4b39', fontSize: '1.2em',marginRight:'5%' }}></i> Connect to Google
+  </Button>
+</div>
+<div>
+  <Button variant="primary" style={{ backgroundColor: 'white', borderColor: '#1f5692', color: 'grey', width: '70%', height: '60px', marginTop: '10px' }}>
+    <i className="fab fa-instagram" style={{ color: '#bc2a8d', fontSize: '1.2em',marginRight:'5%' }}></i> Connect to Instagram
+  </Button>
+</div>
+
+
+    </div>
     <div>
 
-    <Bar data={data} style={{height:'300px'}} />
+    {/* <Bar data={data} style={{height:'300px',color:'#f66b1d'}} /> */}
   </div>
     
     {/* Rest of your content */}
@@ -194,13 +237,17 @@ const data = {
                     
 
                          
-                    </Card>}
+                    </Card>
+                    </div>}
                     </div>
 
 
 
            
         </div>
+        <footer className="bg-light text-lg-start" style={{marginTop:'100px'}}>
+       <Footer/>
+      </footer>
         </>
     );
 }

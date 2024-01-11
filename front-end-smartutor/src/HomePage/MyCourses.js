@@ -18,6 +18,7 @@ import userService from '../landing_page_component/UserSerive';
 import styled from 'styled-components';
 import CreateStudyPlan from './CreateStudyPlans';
 import ProfilePage from './ProfilePage';
+import Footer from "../landing_page_component/footer"
 function App() {
   const { userData } = useContext(UserContext);
   const navigate = useNavigate()
@@ -115,7 +116,7 @@ function App() {
             <section>
               {/* Your content for "My Courses" */}
               <div> 
-              <div style={{marginTop:'6%',marginLeft:'40%' ,backgroundColor:'#e1efff'}}>
+              <div style={{marginTop:'100px',marginLeft:'35%' ,backgroundColor:'#e1efff'}}>
               <Button 
     onClick={() => handleTabClick(1)} 
     style={{
@@ -154,8 +155,8 @@ function App() {
     
 
           
-      <footer className="bg-light text-lg-start">
-        {/* Your existing footer content */}
+            <footer className="bg-light text-lg-start" style={{marginTop:'100px'}}>
+       <Footer/>
       </footer>
     </div>
   

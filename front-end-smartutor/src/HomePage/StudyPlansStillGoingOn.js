@@ -48,10 +48,10 @@ const StudyPlans = ({ itemsPerPage }) => {
       ) : (
         <>
           {currentStudyPlans.map((studyPlan, index) => (
-            <Card key={index} style={{ width: '80%', marginLeft: '15%', marginTop: '10px' }}>
+            <Card key={index} style={{ width: '60%', marginLeft: '15%', marginTop: '10px' }}>
               <Row>
                 <Col sm={4}>
-                  <Card.Img variant="top" style={{ width: '300px', height: '150px', marginTop: '0px' }} src={studyPlan.image} />
+                  <Card.Img variant="top" style={{ width: '100%', height: '150px', marginTop: '0px' }} src={studyPlan.image} />
                 </Col>
                 <Col sm={8}>
                   <Card.Body style={{ textAlign: 'left' }}>

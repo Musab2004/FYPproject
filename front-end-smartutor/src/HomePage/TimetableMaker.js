@@ -21,38 +21,37 @@ import {Form, Tabs, Tab,Button,Card ,Row,Col,Modal,Container} from 'react-bootst
 
 
 
-const deleteChapter = chapterId => {
-  userService.delete(`/api/chapters/${chapterId}`)
-  .then(response => {
-    // Remove the deleted post from the UI
-    // setPosts(posts.filter(post => post.id !== postId));
-    console.log(`Deleted post ${chapterId}`);
-    
-  })
-  .catch(error => {
-    console.error(`Error deleting Chapter ${chapterId}:`, error);
-  });
-  // Add logic to remove chapter from course planner
-};
 
-
-const deleteTopic = topicId => {
-  userService.delete(`/api/topics/${topicId}`)
-  .then(response => {
-    // Remove the deleted post from the UI
-    // setPosts(posts.filter(post => post.id !== postId));
-    console.log(`Deleted post ${topicId}`);
-    
-  })
-  .catch(error => {
-    console.error(`Error deleting post ${topicId}:`, error);
-  });
-  // Add logic to remove topic from course planner
-};
-
-function ChapterList({ chapters }) {
+function ChapterList({ chapters,fetchBook }) {
   const [expandedChapters, setExpandedChapters] = useState({});
-
+  const deleteChapter = chapterId => {
+    userService.delete(`/api/chapters/${chapterId}`)
+    .then(response => {
+      // Remove the deleted post from the UI
+      // setPosts(posts.filter(post => post.id !== postId));
+      console.log(`Deleted post ${chapterId}`);
+      fetchBook()
+    })
+    .catch(error => {
+      console.error(`Error deleting Chapter ${chapterId}:`, error);
+    });
+    // Add logic to remove chapter from course planner
+  };
+  
+  
+  const deleteTopic = topicId => {
+    userService.delete(`/api/topics/${topicId}`)
+    .then(response => {
+      // Remove the deleted post from the UI
+      // setPosts(posts.filter(post => post.id !== postId));
+      console.log(`Deleted post ${topicId}`);
+      fetchBook()
+    })
+    .catch(error => {
+      console.error(`Error deleting post ${topicId}:`, error);
+    });
+    // Add logic to remove topic from course planner
+  };
   const toggleTopics = chapterId => {
     setExpandedChapters(prevState => ({
       ...prevState,
@@ -62,10 +61,11 @@ function ChapterList({ chapters }) {
 
   return (
 
-    <div>
- 
-       <h style={{color:'#f66b1d'}}>Remove Any Topics if you </h>
-    <div style={{ maxHeight: '400px',width:'100%' , overflowY: 'auto' }}>
+    <div style={{textAlign:'center'}}>
+ <div style={{marginTop:'30px'}}>
+       <h style={{color:'#f66b1d',fontSize:'24px',fontWeight:'bold'}}>Remove Any Topics if you </h>
+       </div>
+    <div style={{ maxHeight: '400px',width:'100%' , overflowY: 'auto',marginTop:'5%' }}>
      
       <ul>
         {chapters.map(chapter => (
@@ -77,14 +77,14 @@ function ChapterList({ chapters }) {
     <Button 
       variant="contained" 
       onClick={() => toggleTopics(chapter.chapter_id)}
-      style={{ fontWeight: 'bold', backgroundColor:'None', borderColor:'black',marginLeft:'10px',height:'40px',width:'40px'}}
+      style={{ fontWeight: 'bold', backgroundColor:'None', borderColor:'white',marginLeft:'10px',height:'40px',width:'40px'}}
     >
-   <i class="fa-solid fa-caret-down" style={{color:'blue'}}></i>
+   <i class="fa-solid fa-caret-down" style={{color:'#1f5692'}}></i>
     </Button>
     <Button 
       variant="contained" 
       onClick={() => deleteChapter(chapter.chapter_id)}
-      style={{ fontWeight: 'bold',marginLeft:'10px',height:'40px',width:'40px'}}
+      style={{ fontWeight: 'bold',marginLeft:'10px',backgroundColor:'None',height:'40px',width:'40px'}}
     >
       <i class="fa fa-trash" style={{color:'red'}} aria-hidden="true"></i>
     </Button>
@@ -125,24 +125,28 @@ const Sidebar = () => {
   const navigate = useNavigate();
   let location = useLocation();
   let books = location.state.books;
-  const [bookData, setbookData] = useState([]);
+
   const [WeeklyTopic, setWeeklyTopic] = useState([]);
   // const response=props.value.bookdata
   // console.log(response)
+  const [bookData, setbookData] = useState([]);
+const [bookChapters, setBookChapters] = useState([
+]);
+const fetchBook = async () => {
+  try { 
+    const response = await userService.get(`/api/books/${books.books}/`);
+    console.log(response.data);
+    setbookData(response.data);
+  } catch (error) {
+    console.error('Failed to fetch posts', error);
+    // navigate('/landingpage');
+  }
+};
   
-  const [bookChapters, setBookChapters] = useState([
-  ]);
+
   useEffect(() => {
-  const fetchBook = async () => {
-    try { 
-      const response = await userService.get(`/api/books/${books.books}/`);
-      console.log(response.data);
-      setbookData(response.data);
-    } catch (error) {
-      console.error('Failed to fetch posts', error);
-      // navigate('/landingpage');
-    }
-  };
+
+ 
 
   fetchBook();
 }, []);// This will run only once, when the component mounts
@@ -230,16 +234,16 @@ const Sidebar = () => {
     `}
   </style>
          <Navbar activeTab={activeTab} />
-         <Container style={{backgroundColor:'#e1efff',alignItems:'Center'}}>
+         <Container style={{backgroundColor:'#e1efff',alignItems:'center', borderRadius: '10px'}}>
           <div style={{display:'flex',marginTop:'5%'}}>
    <div className="container-fluid" style={{marginTop:'50px',marginBottom:'5%',alignItems:'Center',backgroundColor:'#f8f9fa'}}>
       
-          {chapters_data && <ChapterList chapters={chapters_data} />}
+          {chapters_data && <ChapterList chapters={chapters_data} fetchBook={fetchBook} />}
 
-          <section style={{marginLeft:'25%'}}>  
+          <section style={{marginLeft:'40%'}}>  
       <br/>
       <br/>
-      <h style={{color:'#f66b1d'}}>Select Start Date:</h>
+      <h style={{color:'#f66b1d',fontSize:'24px',fontWeight:'bold'}}>Select Start Date</h>
       <br/>
       <br/>
       <DatePicker id="startDate"  selected={startDate} onChange={date => setStartDate(date)} minDate={new Date()} />
@@ -247,7 +251,7 @@ const Sidebar = () => {
   <div>
         <Button
         onClick={() => NextStep()}
-      style={{ fontWeight: 'bold', borderColor:'#f66b1d',backgroundColor:'#f66b1d' ,marginTop:'30px',height:'50px',width:'150px'}}
+      style={{ fontWeight: 'bold', borderColor:'#f66b1d',backgroundColor:'#f66b1d' ,marginTop:'30px',marginBottom:'30px',height:'50px',width:'150px'}}
     >
       To Next Step
     </Button>
@@ -255,12 +259,12 @@ const Sidebar = () => {
     </section>
 
     </div>
-    <img
+    {/* <img
     src={background_image}
     alt=""
     loading="lazy"
     style={{ flex: 1, height: '80vh',width:'100%', objectFit: 'cover' ,marginTop:'50px' }}
-  />
+  /> */}
     </div>
     </Container>
     {/* { step2 && <>  

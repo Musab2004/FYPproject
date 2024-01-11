@@ -16,23 +16,25 @@ function App() {
   const [activeTab, setActiveTab] = useState("createstudyplan");
   console.log(studyPlan);
  const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchWeeklyGoals = async () => {
+ const fetchWeeklyGoals = async () => {
      
-        const response = await userService.get('api/getweeklygoals/', {
-          params: {
-            studyplan_id: studyPlan_id,
-          }
-        })
-        .then(response => {
-          console.log(response.data);
-          setData(response.data);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      
-    };
+  const response = await userService.get('api/getweeklygoals/', {
+    params: {
+      studyplan_id: studyPlan_id,
+    }
+  })
+  .then(response => {
+    console.log(response.data);
+    setData(response.data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+};
+ fetchWeeklyGoals()
+  useEffect(() => {
+  
   
     fetchWeeklyGoals();
   }, []);
@@ -62,21 +64,23 @@ function App() {
 <div>
   
   <div className="container py-7" style={{textAlign:'center'}}>
-    <h2 className="text-uppercase text-letter-spacing-xs my-0 text-primary font-weight-bold">
+    <h2 className="text-uppercase text-letter-spacing-xs my-0  font-weight-bold" style={{color:'#1f5692'}}>
       StudyPlan Schedule
     </h2>
-    <p>Your Final Time Table is here.</p>
-    <p>Quizes per Week : {studyPlan.QuizesPerWeek}</p>
+    <p style={{color:'grey'}}>Your Final Time Table is here.</p>
+    <p style={{color:'grey'}}s>Quizes per Week : {studyPlan.QuizesPerWeek}</p>
     <div className="row">
       {data.map((weekData, index) => (
         <div className="col-lg-4 mb-3" id={`week-${weekData.weekly_goals.order}`} key={index} style={{ marginTop: '5%' }}>
-          <h4 className="mt-0 mb-3 text-dark op-8 font-weight-bold">
+          <div style={{textAlign:'left'}}>
+          <h4 className="mt-0 mb-3  op-8 font-weight-bold" style={{color:'#1f5692'}}>
             Week {weekData.weekly_goals.order} 
           </h4>
-          <p style={{color:'blue'}}>{weekData.weekly_goals.start_date} - {weekData.weekly_goals.end_date  }</p>
-          <ul className="list-timeline list-timeline-primary">
+          <p style={{color:'grey'}}>{weekData.weekly_goals.start_date} - {weekData.weekly_goals.end_date  }</p>
+          </div>
+          <ul className="list-timeline list-timeline-primary" style={{textAlign:'left'}}>
             {weekData.chapters.map((chapter, chapIndex) => (
-              <li className="list-timeline-item p-0 pb-3 pb-lg-4 d-flex flex-wrap flex-column" key={chapIndex}>
+              <li className="list-timeline-item p-0 pb-3 pb-lg-4 d-flex flex-wrap flex-column" key={chapIndex} style={{color:'grey'}}>
                 <p className="my-0 text-dark flex-fw text-sm text-uppercase">
                   {chapter.title}
                 </p>

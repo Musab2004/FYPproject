@@ -38,7 +38,7 @@ const Footer = () => {
                 <i className="fas fa-gem me-3"></i>SmartTutor AI
               </h6>
               <p>
-                Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Welcome to SmartTutor AI, your personalized learning companion designed to make education engaging, effective, and tailored just for you
               </p>
             </div>
 
@@ -80,13 +80,13 @@ const Footer = () => {
 
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
               <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
-              <p><i className="fas fa-home me-3"></i> New York, NY 10012, US</p>
+              <p><i className="fas fa-home me-3"></i> Lahore, LHR 10012, PK</p>
               <p>
                 <i className="fas fa-envelope me-3"></i>
-                info@example.com
+                smarttutorai@mail.com
               </p>
-              <p><i className="fas fa-phone me-3"></i> + 01 234 567 88</p>
-              <p><i className="fas fa-print me-3"></i> + 01 234 567 89</p>
+              <p><i className="fas fa-phone me-3"></i> + 92 334 567 88</p>
+              <p><i className="fas fa-print me-3"></i> + 92 234 567 89</p>
             </div>
           </div>
         </div>

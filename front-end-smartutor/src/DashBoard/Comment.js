@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DefaulUser from './default_user.png'
 // import { UserContext } from '../landing_page_component/UserContext';
 
 
@@ -164,26 +165,31 @@ const Comments = (props) => {
   return (
     <>
     <br/>
-            <div style={{marginLeft:"20%"}}>
-          <div style={{ display: 'flex', alignItems: 'center'}}>
+    <Card style={{marginLeft:"20%"}}>
+            <div>
+          <div style={{ display: 'flex',marginLeft:'5%',marginTop:'2%', alignItems: 'center'}}>
+         
                 <div style={{ marginRight: '15px' }}>
+                 
               <Card.Img
                 variant="top"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQYPxHTOtUvx8GB1mR1XfLov8CmiqxxDBW1d8p78A6Hg&s"
+                src={DefaulUser}
                 style={{
                   borderRadius: '50%',
-                  width: '30px', 
-                  height: '30px', 
+                  width: '40px', 
+                  height: '40px', 
                   objectFit: 'cover', 
                 }}
               />
             </div>
             <div>
-            <Card.Title>{author.name}</Card.Title>
+            <h1 style={{fontSize:'14px'}}>{author.name}</h1>
+           
+            <h>{author.email_address}</h>
             
     
             </div>
-            <div style={{marginLeft:'70%'}}>
+            <div style={{marginLeft:'40%'}}>
       <IconButton
         aria-label="more"
         aria-controls="long-menu"
@@ -209,18 +215,27 @@ const Comments = (props) => {
           Edit
         </MenuItem>
         <MenuItem key="Delete" onClick={() => handleDeleteComment(comment)}>
-          DeleteW
+          Delete
         </MenuItem>
         <MenuItem key="Report" onClick={handleModalOpen}>
           Report
         </MenuItem>
       </Menu>
+     
     </div>
+    
             </div>
-            <div>
+            <div style={{marginLeft:'5%',marginTop:'3%'}}>
 
             <Card.Text>{comment.text}</Card.Text>
             </div>
+            <hr
+        style={{
+            color: ' solid black',
+            backgroundColor: 'solid black',
+            height: 3
+        }}
+        />
             <div>
             {isEditing === comment.id ? (
             <>
@@ -234,20 +249,22 @@ const Comments = (props) => {
             <>
             
                 
-             
-              <Button onClick={() => handleUpvoteComment(comment,comment.id)} style={{background:'none'}}>
+             <div style={{marginLeft:'25%'}}>
+              <Button onClick={() => handleUpvoteComment(comment,comment.id)} style={{background:'none',border:'None'}}>
                 
             
-              {comment.is_upvoted.includes(userData.pk)  ? <i className="fas fa-thumbs-up" style={{ color: 'green' }}></i> : <i className="far fa-thumbs-up " style={{ color: 'grey' }}></i>}
+              {comment.is_upvoted.includes(userData.pk)  ? <i className="fas fa-thumbs-up" style={{ color: 'blue' }}></i> : <i className="far fa-thumbs-up " style={{ color: 'grey' }}></i>}
               <div style={{color:'black'}}>{comment.is_upvoted.length}</div>
             </Button>
-
+            </div>
             </>
           )}
 
 
             </div>
+          
             </div>
+            </Card>
       
           
             <Modal show={showModal} onHide={handleModalClose}>
@@ -274,7 +291,7 @@ const Comments = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>          
-          
+         
           </>
   );
 };

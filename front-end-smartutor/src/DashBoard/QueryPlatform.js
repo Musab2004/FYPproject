@@ -9,6 +9,7 @@ import ResourcePreview from './ResourcePreview';
 import { UserContext } from '../landing_page_component/UserContext';
 import userService from '../landing_page_component/UserSerive';
 import LoadingScreen from '../HomePage/LoaderScreen';
+import Footer from "../landing_page_component/footer"
 // import { Link,useNavigate } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
 const StylishTabs = () => {
@@ -241,10 +242,10 @@ const StylishTabs = () => {
     <Container>
       <Row>
         <Col xs={8}>
-          <h1>Latest Question Asked</h1>
+          <h1 style={{fontSize:'30px',color:'#1f5692',fontStyle:'italic'}}>Latest Question Asked</h1>
         </Col>
         <Col>
-          <Button variant="primary" onClick={handleModalShow}>
+          <Button variant="primary" onClick={handleModalShow}  style={{backgroundColor: '#f66b1d',borderColor:'#f66b1d'}}>
             Ask a question
           </Button>
           {/* Other content related to the latest question goes here */}
@@ -295,6 +296,9 @@ const StylishTabs = () => {
     
 
     </div>
+    <footer className="bg-light text-lg-start" style={{marginTop:'100px'}}>
+       <Footer/>
+      </footer>
     </>
   );
 };

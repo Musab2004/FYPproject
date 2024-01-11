@@ -9,6 +9,7 @@ import ResourcePreview from './ResourcePreview';
 import { UserContext } from '../landing_page_component/UserContext';
 import userService from '../landing_page_component/UserSerive';
 import StudyPlanSettings from './StudyPlanSettings';
+import Footer from "../landing_page_component/footer"
 // import { Link,useNavigate } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
 const StylishTabs = () => {
@@ -247,6 +248,9 @@ const StylishTabs = () => {
 
 <Sidebar/>
     </div>
+    <footer className="bg-light text-lg-start" style={{marginTop:'100px'}}>
+       <Footer/>
+      </footer>
     </>
   );
 };

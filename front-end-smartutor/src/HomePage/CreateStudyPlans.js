@@ -9,11 +9,13 @@ import styled from 'styled-components';
 import LoadingScreen from './LoaderScreen';
 import { Link,useNavigate } from 'react-router-dom';
 import ResourcePreview from '../DashBoard/ResourcePreview';
+import Footer from "../landing_page_component/footer"
 // import Quiz_icon from './Quiz_icon.png';
 // import Summary_icon from './Summary_icon.png';
 // Define your styled components
 const StyledForm = styled(Form)`
   margin-top: 50px;
+  margin-bottom: 50px;
   background-color: #f8f9fa;
   backdropFilter: 'blur(50px)';
   padding: 20px;
@@ -139,7 +141,7 @@ const StudyPlanForm = () => {
       }
     `}
   </style>
-    {isLoading ? <LoadingScreen /> : <>
+    {isLoading ?<>  <Navbar activeTab={activeTab} /> <LoadingScreen /> </>: <>
 
     <Navbar activeTab={activeTab} />
     <Container style={{backgroundColor:'#e1efff'}}  >
@@ -191,7 +193,7 @@ const StudyPlanForm = () => {
 </Form.Group>
 <br/>
 <Form.Group controlId="academicLevel">
-  <Form.Label>Academic Level</Form.Label>
+  <Form.Label>Choose your resource academic level</Form.Label>
   <Form.Control
     as="select"
     name="academic_level"
@@ -207,7 +209,7 @@ const StudyPlanForm = () => {
 </Form.Group>
 <br/>
 <Form.Group controlId="publicPrivate">
-  <Form.Label>Public or Private</Form.Label>
+  <Form.Label>Choose Visibility of Study Plan</Form.Label>
   <Form.Check
     type="radio"
     label="Public"
@@ -255,18 +257,18 @@ const StudyPlanForm = () => {
         </Form.Control>
       </Form.Group>
 <br/>
-      <StyledButton variant="primary" type="submit" style={{backgroundColor: '#f66b1d'}} onClick={handleSubmit} >
+      <StyledButton variant="primary" type="submit" style={{backgroundColor: '#f66b1d',borderColor: '#f66b1d',width:'20%',marginLeft:'60%'}} onClick={handleSubmit} >
         Submit
         </StyledButton>
       </StyledForm>
 
-
+{/* 
       <img
     src={background_image}
     alt=""
     loading="lazy"
     style={{ flex: 1, height: '85vh',width:'100%', objectFit: 'cover' ,marginTop:'50px' }}
-  />
+  /> */}
       </div>
       </Container>
    
@@ -276,6 +278,9 @@ const StudyPlanForm = () => {
    {/* {NextStep ? <MakeTimeTable>: <>
    <div>hehehehhe</div>
    </>} */}
+     <footer className="bg-light text-lg-start" style={{marginTop:'100px'}}>
+       <Footer/>
+      </footer>
    </>
   );
 };

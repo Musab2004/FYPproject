@@ -10,6 +10,7 @@ import { UserContext } from '../landing_page_component/UserContext';
 import userService from '../landing_page_component/UserSerive';
 import StudyPlanSettings from './StudyPlanSettings';
 // import { Link,useNavigate } from 'react-router-dom';
+import Footer from "../landing_page_component/footer"
 import { Editor } from '@tinymce/tinymce-react';
 const StylishTabs = () => {
   const navigate = useNavigate()
