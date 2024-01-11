@@ -20,6 +20,7 @@ import DisscusionForumDashBoard from './DashBoard/QueryPlatform';
 import SummaryGenerationDashBoard from './DashBoard/SummaryGeneration';
 import QuizGenerationDashBoard from './DashBoard/QuizGeneration';
 import SettingsDashBoard from './DashBoard/StudyPlanSettings';
+import DashBoardQuizRoom from './DashBoard/QuizRoom'
 import UserProvider from './landing_page_component/UserContext'
 import Post from './DashBoard/Post'
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route exact path="/dashboard" element={<DashBoard />} />
           <Route exact path="/dashboard-summary-generation" element={<SummaryGenerationDashBoard />} />
           <Route exact path="/dashboard-quiz-generation" element={<QuizGenerationDashBoard />} />
+          <Route exact path="/dashboard-quiz-room" element={<DashBoardQuizRoom />} />
           <Route exact path="/dashboard-discussion-forum" element={<DisscusionForumDashBoard />} />
           <Route exact path="/landingpage" element={<LandingPage />} />
           <Route exact path="/homepage" element={<HomePage />} />

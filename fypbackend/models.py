@@ -157,3 +157,14 @@ class Question(models.Model):
     content = models.TextField()
     is_mcq = models.BooleanField(default=True)
     distractors = models.TextField()    
+
+class QuizRoom(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE,related_name="owned_quizroom")
+    members = models.ManyToManyField(User,null=True,related_name="joined_quizroom")
+    Topics = models.ManyToManyField(Topic, blank=True, null=True)
+    duration = models.IntegerField()
+    is_mcq = models.BooleanField(default=True)    
+    is_completed=models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.name    

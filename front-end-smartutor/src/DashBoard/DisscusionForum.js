@@ -229,16 +229,21 @@ const RedditPost = (props) => {
 
  
 
-  const handleUpvotePost = () => {
+  const handleUpvotePost = (postId) => {
     if (upvoted) {
-      userService.post(`api/downvotepost/`, { user: userData.pk,post:post.id });
+      userService.post(`api/downvotepost/`, { user: userData.pk,post:postId });
       // If already upvoted, allow the user to revoke the upvote
-      // props.fetchPostfunc()
+      props.fetchPostfunc()
+      props.fetchPostfunc()
+      props.fetchPostfunc()
       setUpvoted(false);
     } else {
-      userService.post(`api/upvotepost/`, { user: userData.pk,post:post.id });
+      userService.post(`api/upvotepost/`, { user: userData.pk,post:postId });
       // Otherwise, upvote the comment
       setUpvoted(true);
+      props.fetchPostfunc()
+      props.fetchPostfunc()
+      props.fetchPostfunc()
       // props.fetchPostfunc()
     }
   };
@@ -307,7 +312,7 @@ const RedditPost = (props) => {
     </div>
     <div>
       <Card.Title style={{fontSize:'16px',fontWeight:'bold'}}>{author.name}</Card.Title>
-      <p>@{author.email_address}</p>
+      <p>{author.email_address}</p>
    
     </div>
     <div style={{marginLeft:'60%'}}>
@@ -357,7 +362,7 @@ const RedditPost = (props) => {
         />
   
           <div style={{display:'flex', alignItems: 'center',marginLeft:'25%'}}>
-  <Button onClick={handleUpvotePost} class='' style={{ background: 'none', borderColor:'white', color: upvoted ? 'green' : 'black', height: '40px', width: '40px' }} title="Upvote Post">
+  <Button  onClick={() => handleUpvotePost(post.id)} class='' style={{ background: 'none', borderColor:'white', color: upvoted ? 'green' : 'black', height: '40px', width: '40px' }} title="Upvote Post">
     {upvoted ? <i className="fas fa-thumbs-up"></i> : <i className="far fa-thumbs-up"></i>}
     {post.is_upvoted && <div>{post.is_upvoted.length}</div>}
   </Button>

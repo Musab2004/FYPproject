@@ -3,8 +3,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 from datetime import timedelta
 from .models import User
-from .Serilizer import UserSerializer,QueryPostSerializer,QuestionSerializer,QuizSerializer,TopicSerializer,AnswersPostSerializer,ReportAnswersSerializer,ReportPostSerializer,StudyPlanSerializer,WeeklyGoalsSerializer,ChapterSerializer,BookSerializer
-from .models import StudyPlan,Quiz,User,Topic,QueryPost,AnswersPost,ReportPost,ReportAnswers,WeeklyGoals,Quiz,Question,Chapter,Book
+from .Serilizer import UserSerializer,QueryPostSerializer,QuestionSerializer,QuizSerializer,TopicSerializer,AnswersPostSerializer,ReportAnswersSerializer,ReportPostSerializer,StudyPlanSerializer,WeeklyGoalsSerializer,ChapterSerializer,BookSerializer,QuizRoomSerializer
+from .models import StudyPlan,Quiz,User,Topic,QueryPost,AnswersPost,ReportPost,ReportAnswers,WeeklyGoals,Quiz,Question,Chapter,Book,QuizRoom
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
@@ -182,6 +182,19 @@ class QuizListCreate(generics.ListCreateAPIView):
 class QuizDetailsUpdate(generics.RetrieveUpdateAPIView):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+class QuizRoomListCreate(generics.ListCreateAPIView):
+    queryset = QuizRoom.objects.all()
+    serializer_class = QuizRoomSerializer
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+class QuizRoomDetailsUpdate(generics.RetrieveUpdateAPIView):
+    queryset = QuizRoom.objects.all()
+    serializer_class = QuizRoomSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 

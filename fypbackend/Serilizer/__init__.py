@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import StudyPlan,Quiz,User,Topic,QueryPost,AnswersPost,ReportPost,ReportAnswers,WeeklyGoals,Quiz,Question,Chapter,Book
+from ..models import StudyPlan,Quiz,User,Topic,QueryPost,AnswersPost,ReportPost,ReportAnswers,WeeklyGoals,Quiz,Question,Chapter,Book,QuizRoom
 
 # class DocumentSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -9,6 +9,10 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+class QuizRoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuizRoom
+        fields = '__all__'      
 class StudyPlanSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(max_length=None, allow_empty_file=True, required=False)
 
