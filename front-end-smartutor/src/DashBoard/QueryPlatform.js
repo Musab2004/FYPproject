@@ -1,242 +1,249 @@
-import React, { useState,useContext,useEffect } from 'react';
-import  { useLocation,useNavigate,Link } from 'react-router-dom';
-import { Tabs, Tab,Button ,Row,Col,Modal,Container,Alert,ButtonGroup} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Sidebar from './sidebar';
-import DashBoardNavbar from './DashBoardNavbar';
-import DisscusionForum from './DisscusionForum';
-import ResourcePreview from './ResourcePreview';
-import { UserContext } from '../landing_page_component/UserContext';
-import userService from '../landing_page_component/UserSerive';
-import LoadingScreen from '../HomePage/LoaderScreen';
-import Footer from "../landing_page_component/footer"
-import DashboardTabs from './Dashbaord_tabs';
+import React, { useState, useContext, useEffect } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import { Tabs, Tab, Button, Row, Col, Modal, Container, Alert, ButtonGroup } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Sidebar from "./sidebar";
+import DashBoardNavbar from "./DashBoardNavbar";
+import DisscusionForum from "./DisscusionForum";
+import ResourcePreview from "./ResourcePreview";
+import { UserContext } from "../landing_page_component/UserContext";
+import userService from "../landing_page_component/UserSerive";
+import LoadingScreen from "../HomePage/LoaderScreen";
+import Footer from "../landing_page_component/footer";
+import DashboardTabs from "./Dashbaord_tabs";
 // import { Link,useNavigate } from 'react-router-dom';
-import { Editor } from '@tinymce/tinymce-react';
+import { Editor } from "@tinymce/tinymce-react";
 const StylishTabs = () => {
-  const navigate = useNavigate()
-  const { userData } = useContext(UserContext);
-  const [key, setKey] = useState('tab4');
-  const [isLoading, setIsLoading] = useState(false);
-  const [activeButton, setActiveButton] = useState('tab4');
-  // const [alertPost, setAlertPost] = useState({show: false, variant: '', message: ''});
-  const [alert, setAlert] = useState({show: false, variant: '', message: ''});
+	const navigate = useNavigate();
+	const { userData } = useContext(UserContext);
+	const [key, setKey] = useState("tab4");
+	const [isLoading, setIsLoading] = useState(false);
+	const [activeButton, setActiveButton] = useState("tab4");
+	// const [alertPost, setAlertPost] = useState({show: false, variant: '', message: ''});
+	const [alert, setAlert] = useState({ show: false, variant: "", message: "" });
 
-  const [posts, setPosts] = useState([]);
-  const [bookData, setbookData] = useState([]);
-  
-  const [visiblePosts, setVisiblePosts] = useState(4); // Number of posts to display initially
-  // console.log(userData)
-  const location = useLocation();
+	const [posts, setPosts] = useState([]);
+	const [bookData, setbookData] = useState([]);
 
-  const studyPlan = location.state?.studyPlan;
-  const plan=studyPlan
-  console.log(studyPlan)
-  if (!studyPlan) {
-    navigate('/homepage'); // Replace '/homepage' with your homepage route
-  }
-  else{
+	const [visiblePosts, setVisiblePosts] = useState(4); // Number of posts to display initially
+	// console.log(userData)
+	const location = useLocation();
 
+	const studyPlan = location.state?.studyPlan;
+	const plan = studyPlan;
+	console.log(studyPlan);
+	if (!studyPlan) {
+		navigate("/homepage"); // Replace '/homepage' with your homepage route
+	} else {
+	}
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (!token) {
+			console.log("token does'nt exit : ", localStorage);
+			// Redirect to landing page if token doesn't exist
 
+			navigate("/");
+		} else {
+		}
+	}, []);
 
-  }
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.log("token does'nt exit : ",localStorage)
-      // Redirect to landing page if token doesn't exist
-      
-      navigate('/landingpage');
-    } else {
-  
-    }
-  }, []);
+	const fetchPosts = async () => {
+		setIsLoading(true);
+		try {
+			const response = await userService.get(`/api/queryposts/?study_plan_id=${studyPlan.id}`);
+			// console.log(response.data);
+			setPosts(response.data);
+		} catch (error) {
+			console.error("Failed to fetch posts", error);
+			// navigate('/homepage');
+		}
+		setIsLoading(false);
+	};
 
-  const fetchPosts = async () => {
-    setIsLoading(true);
-  try { 
-    const response = await userService.get(`/api/queryposts/?study_plan_id=${studyPlan.id}`);
-    // console.log(response.data);
-    setPosts(response.data);
-  } catch (error) {
-    console.error('Failed to fetch posts', error);
-    // navigate('/homepage');
-  }
-  setIsLoading(false);
-};
-  useEffect(() => {
+	useEffect(() => {
+		fetchPosts(); // This will run only once, when the component mounts
+	}, []);
 
-    fetchPosts(); // This will run only once, when the component mounts
-  },[]);
+	const fetchBook = async () => {
+		try {
+			const response = await userService.get(`/api/books/${studyPlan.books}/`);
+			// console.log(response.data);
+			setbookData(response.data);
+		} catch (error) {
+			console.error("Failed to fetch posts", error);
+			// navigate('/');
+		}
+	};
 
-  const fetchBook = async () => {
-    try { 
-      const response = await userService.get(`/api/books/${studyPlan.books}/`);
-      // console.log(response.data);
-      setbookData(response.data);
-    } catch (error) {
-      console.error('Failed to fetch posts', error);
-      // navigate('/landingpage');
-    }
-  };
+	useEffect(() => {
+		fetchBook(); // This will run only once, when the component mounts
+	}, []);
+	// console.log(studyPlan);
+	// console.log(props)
+	const [showModal, setShowModal] = useState(false);
+	const [postInput, setPostInput] = useState("");
+	const [textAreaValue, setTextAreaValue] = useState("");
+	const handleModalClose = () => {
+		setShowModal(false);
+	};
 
-  useEffect(() => {
-    fetchBook(); // This will run only once, when the component mounts
-  }, []);
-  // console.log(studyPlan);
-  // console.log(props)
-  const [showModal, setShowModal] = useState(false);
-  const [postInput, setPostInput] = useState('');
-  const [textAreaValue, setTextAreaValue] = useState('');
-  const handleModalClose = () => {
-    setShowModal(false);
-  };
+	const handleModalShow = () => {
+		setShowModal(true);
+	};
 
-  const handleModalShow = () => {
-    setShowModal(true);
-  };
+	const handlePostSubmit = async (e) => {
+		// Assuming postInput contains the data to be sent
+		const postData = {
+			content: textAreaValue,
+			author: userData.pk,
+			study_plan: studyPlan.id,
+		};
 
-  const handlePostSubmit = async (e) => {
-    // Assuming postInput contains the data to be sent
-    const postData = {
-      content:textAreaValue,
-      author: userData.pk,
-      study_plan:studyPlan.id,
+		try {
+			const response = await userService.post("/api/queryposts/", postData);
+			// Handle success - maybe show a success message or redirect
+			console.log("Response:", response.data);
+			console.log("Response:", response.data);
+			handleModalClose();
+			fetchPosts();
+			setAlert({ show: true, variant: "success", message: "Post submitted successfully!" });
+		} catch (error) {
+			// Handle error - show error message or perform necessary actions
+			// console.error('Error:', error);
+			console.error("Error:", error);
 
-    };
-  
-      try {
-        const response = await userService.post('/api/queryposts/', postData);
-        // Handle success - maybe show a success message or redirect
-        console.log('Response:', response.data);
-        console.log('Response:', response.data);
-        handleModalClose();
-        fetchPosts();
-        setAlert({show: true, variant: 'success', message: 'Post submitted successfully!'});
-      } catch (error) {
-        // Handle error - show error message or perform necessary actions
-        // console.error('Error:', error);
-        console.error('Error:', error);
-         
-        handleModalClose();
-        setAlert({show: true, variant: 'danger', message: 'Error submitting post!'});
-      }
-  };
+			handleModalClose();
+			setAlert({ show: true, variant: "danger", message: "Error submitting post!" });
+		}
+	};
 
-  const postsPerPage = 4; // Number of posts to load per click
+	const postsPerPage = 4; // Number of posts to load per click
 
-  const handleLoadMore = () => {
-    setVisiblePosts(visiblePosts + postsPerPage);
-  };
+	const handleLoadMore = () => {
+		setVisiblePosts(visiblePosts + postsPerPage);
+	};
 
-  const [content, setContent] = useState('');
+	const [content, setContent] = useState("");
 
-  const handleEditorChange = (content) => {
-    setPostInput(content);
-  };
+	const handleEditorChange = (content) => {
+		setPostInput(content);
+	};
 
-  const handleTextAreaChange = (event) => {
-    setTextAreaValue(event.target.value);
-  };
-  const handleClick = (tab, path) => {
-    setActiveButton(tab);
-    navigate(path,{state:{
-        studyPlan
-          },});
-  };
+	const handleTextAreaChange = (event) => {
+		setTextAreaValue(event.target.value);
+	};
+	const handleClick = (tab, path) => {
+		setActiveButton(tab);
+		navigate(path, {
+			state: {
+				studyPlan,
+			},
+		});
+	};
 
-  return (
-    <>
-   <style>
-    {`
+	return (
+		<>
+			<style>
+				{`
       body {
         background-color: #e1efff; /* Set the background color to blue */
         margin: 0; /* Reset margin for the body */
         padding: 0; /* Reset padding for the body */
       }
     `}
-  </style>
-    <DashBoardNavbar/>
-    {alert.show && <Alert 
-  variant={alert.variant} 
-  style={{
-    marginTop: '50px', 
-    position: 'fixed', 
-    zIndex: 9999, 
-    top: 0, 
-    right: 0, 
-    left: 0
-  }} 
-  onClose={() => setAlert({...alert, show: false})} 
-  dismissible
->
-  {alert.message}
-</Alert>}
-    <div style={{marginTop:'100px' }}>
-        
-<DashboardTabs studyPlan={studyPlan} activeButton={activeButton}/>
-    <Container>
-      <Row>
-        <Col xs={8}>
-          <h1 style={{fontSize:'30px',color:'#1f5692',fontStyle:'italic'}}>Latest Question Asked</h1>
-        </Col>
-        <Col>
-          <Button variant="primary" onClick={handleModalShow}  style={{backgroundColor: '#f66b1d',borderColor:'#f66b1d'}}>
-            Ask a question
-          </Button>
-          {/* Other content related to the latest question goes here */}
-        </Col>
-      </Row>
+			</style>
+			<DashBoardNavbar />
+			{alert.show && (
+				<Alert
+					variant={alert.variant}
+					style={{
+						marginTop: "50px",
+						position: "fixed",
+						zIndex: 9999,
+						top: 0,
+						right: 0,
+						left: 0,
+					}}
+					onClose={() => setAlert({ ...alert, show: false })}
+					dismissible
+				>
+					{alert.message}
+				</Alert>
+			)}
+			<div style={{ marginTop: "100px" }}>
+				<DashboardTabs studyPlan={studyPlan} activeButton={activeButton} />
+				<Container style={{ marginBottom: "15px" }}>
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
+						<h1 style={{ fontSize: "30px", color: "#1f5692", fontStyle: "italic" }}>
+							Latest Question Asked
+						</h1>
+						<Button
+							variant="primary"
+							onClick={handleModalShow}
+							style={{ backgroundColor: "#f66b1d", borderColor: "#f66b1d" }}
+						>
+							Ask a question
+						</Button>
+					</div>
+					<Modal show={showModal} onHide={handleModalClose}>
+						<Modal.Header closeButton>
+							<Modal.Title>Write your post</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>
+							<textarea
+								value={textAreaValue} // Set the value of the text area
+								onChange={handleTextAreaChange} // Handle changes in the text area
+								placeholder="Type something here..."
+								rows={4}
+								cols={40}
+							/>
+						</Modal.Body>
+						<Modal.Footer>
+							<Button variant="secondary" onClick={handleModalClose}>
+								Close
+							</Button>
+							<Button variant="primary" onClick={handlePostSubmit}>
+								Submit
+							</Button>
+						</Modal.Footer>
+					</Modal>
+				</Container>
+				{/* Content for Tab 3 */}
+				{/* <DisscusionForum post={samplePost} /> */}
+				{isLoading ? (
+					<LoadingScreen />
+				) : (
+					<div
+						style={{
+							display: "flex",
+							flexDirection: "column",
+							width: "100%",
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
+						{posts.slice(0, visiblePosts).map((post) => (
+							<DisscusionForum
+								key={post.id}
+								post={post}
+								studyPlan={studyPlan}
+								fetchPostfunc={fetchPosts}
+							/>
+						))}
 
-      <Modal show={showModal} onHide={handleModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Write your post</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
- 
-
-
- 
-<textarea
-        value={textAreaValue} // Set the value of the text area
-        onChange={handleTextAreaChange} // Handle changes in the text area
-        placeholder="Type something here..."
-        rows={4}
-        
-        cols={40}
-      />
-
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handlePostSubmit}>
-            Submit
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Container>
-        {/* Content for Tab 3 */}
-        {/* <DisscusionForum post={samplePost} /> */}
-        {isLoading ? <LoadingScreen /> : <>     
-        {posts.slice(0, visiblePosts).map((post) => (
-        <DisscusionForum key={post.id} post={post} studyPlan={studyPlan} fetchPostfunc={fetchPosts}/> 
-      ))}
-    
-      {visiblePosts < posts.length && (
-        <Button onClick={handleLoadMore} style={{marginTop:'5px',marginLeft:'50%'}}>Load More</Button>
-      )}
-      </>}
-    
-    
-
-    </div>
-    <footer className="bg-light text-lg-start" style={{marginTop:'100px'}}>
-       <Footer/>
-      </footer>
-    </>
-  );
+						{visiblePosts < posts.length && (
+							<Button onClick={handleLoadMore} style={{ marginTop: "5px", marginLeft: "50%" }}>
+								Load More
+							</Button>
+						)}
+					</div>
+				)}
+			</div>
+			<footer className="bg-light text-lg-start" style={{ marginTop: "100px" }}>
+				<Footer />
+			</footer>
+		</>
+	);
 };
 
 export default StylishTabs;

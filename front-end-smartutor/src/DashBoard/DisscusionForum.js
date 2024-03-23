@@ -11,7 +11,7 @@ import { IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert } from "@mui/icons-material";
 
 const ITEM_HEIGHT = 48;
-// import { UserContext } from '../landing_page_component/UserContext';
+
 const RedditPost = (props) => {
 	console.log(props);
 	const posts = props.post;
@@ -152,8 +152,6 @@ const RedditPost = (props) => {
 
 			console.log("Response:", response.data);
 			fetchComments();
-			fetchComments();
-			fetchComments();
 		} catch (error) {
 			console.error("Error:", error);
 		}
@@ -219,22 +217,18 @@ const RedditPost = (props) => {
 			userService.post(`api/downvotepost/`, { user: userData.pk, post: postId });
 			// If already upvoted, allow the user to revoke the upvote
 			props.fetchPostfunc();
-			props.fetchPostfunc();
-			props.fetchPostfunc();
 			setUpvoted(false);
 		} else {
 			userService.post(`api/upvotepost/`, { user: userData.pk, post: postId });
 			// Otherwise, upvote the comment
 			setUpvoted(true);
 			props.fetchPostfunc();
-			props.fetchPostfunc();
-			props.fetchPostfunc();
 			// props.fetchPostfunc()
 		}
 	};
 
 	return (
-		<div>
+		<div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
 			{editalert.show && (
 				<Alert
 					variant={alert.variant}
@@ -286,10 +280,10 @@ const RedditPost = (props) => {
 					{deletealert.message}
 				</Alert>
 			)}
-			<Card style={{ marginTop: "10px", width: "40%", marginLeft: "30%" }}>
+			<Card style={{ marginTop: "20px", width: "75%" }}>
 				<Card.Body>
-					<div style={{ display: "flex", alignItems: "center" }}>
-						<div style={{ marginRight: "15px" }}>
+					<div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+						<div style={{ display: "flex" }}>
 							<Card.Img
 								variant="top"
 								src={author.profile_pic || DefaulUser}
@@ -300,12 +294,12 @@ const RedditPost = (props) => {
 									objectFit: "cover", // Maintains the aspect ratio
 								}}
 							/>
-						</div>
-						<div>
-							<Card.Title style={{ fontSize: "16px", fontWeight: "bold" }}>
-								{author.name}
-							</Card.Title>
-							<p>{author.email_address}</p>
+							<div style={{ marginLeft: "1rem" }}>
+								<div style={{ fontSize: "16px", fontWeight: "bold", marginBottom: "-0.25rem" }}>
+									{author.name}
+								</div>
+								<p>{author.email_address}</p>
+							</div>
 						</div>
 						<div style={{ marginLeft: "60%" }}>
 							<IconButton
@@ -352,7 +346,7 @@ const RedditPost = (props) => {
 						}}
 					/>
 
-					<div style={{ display: "flex", alignItems: "center", marginLeft: "25%" }}>
+					<div style={{ display: "flex", alignItems: "center", marginLeft: "10px" }}>
 						<Button
 							onClick={() => handleUpvotePost(post.id)}
 							class=""
@@ -360,17 +354,21 @@ const RedditPost = (props) => {
 								background: "none",
 								borderColor: "white",
 								color: upvoted ? "green" : "black",
+								display: "flex",
+								alignItems: "center",
 								height: "40px",
-								width: "40px",
+								minWidth: "40px",
 							}}
 							title="Upvote Post"
 						>
+							{post.is_upvoted && (
+								<span style={{ marginRight: "5px" }}>{post.is_upvoted.length}</span>
+							)}
 							{upvoted ? (
 								<i className="fas fa-thumbs-up"></i>
 							) : (
 								<i className="far fa-thumbs-up"></i>
 							)}
-							{post.is_upvoted && <div>{post.is_upvoted.length}</div>}
 						</Button>
 						<Button
 							onClick={handleToggleComments}
@@ -471,7 +469,9 @@ const RedditPost = (props) => {
 									value={commentText}
 									onChange={handleInputChange}
 								/>
-								<Button onClick={handleSubmitComment}>Submit</Button>
+								<Button onClick={handleSubmitComment} style={{ marginTop: "1rem" }}>
+									Submit
+								</Button>
 							</Form>
 						</div>
 					)}

@@ -28,9 +28,9 @@ function App() {
 		<UserProvider>
 			<div style={{ backgroundColor: "#e1efff" }}>
 				<BrowserRouter>
-					{/* <LandingPage /> */}
 					<Routes>
-						<Route path="/login" component={LoginForm} />
+						<Route exact path="" element={<LandingPage />} />
+						{/* <Route path="/login" component={LoginForm} /> */}
 						{/* <Route path="/logout" component={LogoutButton} />
           <Route path="/signup" component={SignupForm} /> */}
 						{/* <Route path="/profile" component={UserProfile} />
@@ -51,7 +51,6 @@ function App() {
 							path="/dashboard-discussion-forum"
 							element={<DisscusionForumDashBoard />}
 						/>
-						<Route exact path="/landingpage" element={<LandingPage />} />
 						<Route exact path="/homepage" element={<HomePage />} />
 						<Route exact path="/quiz" element={<QuizPage />} />
 						<Route exact path="/summary" element={<SummaryGenPage />} />

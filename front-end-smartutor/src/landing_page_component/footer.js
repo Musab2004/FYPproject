@@ -73,7 +73,6 @@ const Footer = () => {
 					</a>
 				</div>
 			</section> */}
-
 				<Grid item xs={12} container spacing={2} sx={{ color: "#1f5692" }}>
 					<Grid item xs={12} md={5}>
 						<div style={{ margin: "0 2rem" }}>
@@ -86,7 +85,6 @@ const Footer = () => {
 							</p>
 						</div>
 					</Grid>
-
 					<Grid item xs={12} md={2}>
 						<h6 className="text-uppercase fw-bold mb-4">Products</h6>
 						<p>
@@ -110,7 +108,6 @@ const Footer = () => {
 							</a>
 						</p>
 					</Grid>
-
 					<Grid item xs={12} md={2}>
 						<h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
 						<p>
@@ -134,7 +131,6 @@ const Footer = () => {
 							</a>
 						</p>
 					</Grid>
-
 					<Grid item xs={12} md={3}>
 						<h6 className="text-uppercase fw-bold mb-4">Contact</h6>
 						<p>
@@ -152,7 +148,6 @@ const Footer = () => {
 						</p>
 					</Grid>
 				</Grid>
-
 				<Grid
 					item
 					xs={12}

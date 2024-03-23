@@ -21,8 +21,8 @@ const LoginForm = ({ show, setShow }) => {
 		setPassword("");
 	};
 
-	const handleSubmit = () => {
-		// e.preventDefault();
+	const handleSubmit = (e) => {
+		e.preventDefault();
 
 		if (!emailAddress || !password) {
 			setErrorMessage("Please fill in all fields");

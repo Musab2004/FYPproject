@@ -65,7 +65,7 @@ const StudyPlanSettings = () => {
 			console.log("token does'nt exit : ", localStorage);
 			// Redirect to landing page if token doesn't exist
 
-			navigate("/landingpage");
+			navigate("/");
 		} else {
 		}
 	}, []);

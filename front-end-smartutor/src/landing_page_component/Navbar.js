@@ -29,7 +29,7 @@ const LNavbar = () => {
 					<Navbar.Collapse id="navbarExample01">
 						<Nav className="me-auto">
 							<Link
-								to="/landingpage"
+								to="/"
 								className="me-3"
 								style={{
 									textDecoration: "none",
@@ -144,7 +144,7 @@ const LNavbar = () => {
 					>
 						<MenuItem
 							onClick={() => {
-								navigate("/landingpage");
+								navigate("/");
 							}}
 						>
 							<ListItemIcon>

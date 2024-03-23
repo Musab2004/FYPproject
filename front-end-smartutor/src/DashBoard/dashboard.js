@@ -43,7 +43,7 @@ const StylishTabs = () => {
 			console.log("token does'nt exit : ", localStorage);
 			// Redirect to landing page if token doesn't exist
 
-			navigate("/landingpage");
+			navigate("/");
 		} else {
 		}
 	}, []);
@@ -68,8 +68,8 @@ const StylishTabs = () => {
 
 	if (!studyPlan) {
 		navigate("/homepage"); // Replace '/homepage' with your homepage route
-	} else {
 	}
+
 	const fetchBook = async () => {
 		try {
 			const response = await userService.get(`/api/books/${studyPlan.books}/`);
@@ -77,7 +77,7 @@ const StylishTabs = () => {
 			setbookData(response.data);
 		} catch (error) {
 			console.error("Failed to fetch posts", error);
-			// navigate('/landingpage');
+			// navigate('/');
 		}
 	};
 
