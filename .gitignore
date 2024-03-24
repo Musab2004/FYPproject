@@ -1,1 +1,11 @@
 .idea
+.ipynb_checkpoints
+fypbackend/__pycache__
+fypbackend/migrations/__pycache__
+fypbackend/Serilizer/__pycache__
+fypbackend/QuesGenerator/__pycache__
+front-end-smartutor/node_modules
+node_modules
+*.iml
+*.xml
+*.pyc
