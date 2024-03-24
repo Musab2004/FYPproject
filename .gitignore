@@ -1,0 +1,9 @@
+# Default ignored files
+/.idea
+/media
+/front-end-smartutor/node_modules
+/QuesGenerator/__pycache__
+/node_modules
+/fypbackend/migrations
+/fypbackend/__pycache__
+/fypbackend/Serilizer
